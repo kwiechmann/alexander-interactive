@@ -7,7 +7,7 @@ class customerInfoBaseClass {
   private $type =  NULL;
   private $default = FALSE;
 
-  function __construct($id, $type, $default= FALSE) {
+  function __construct($id, $type, $default = FALSE) {
     $this->id = $id;
     
     switch (get_class($this)) {
