@@ -2,16 +2,17 @@
 
 // Write a set of classes that can represent the following sample customer data.
 
-class customerEmailClass {
-  protected $id = NULL;
-  protected $type =  NULL; // "personal", "work", "cell"
-  protected $address = NULL;
-  protected $default = FALSE;
+class customerInfoBaseClass {
+  private $id = NULL;
+  private $type =  NULL; 
+    // customerEmailClass: ``"personal", "work", "cell"  
+    // customerPhoneClass: ``"Work", "Home"
+    // vudyomrtAddressClass: "shipping", "billing"
+  private $default = FALSE;
 
-  function __construct($id, $type, $address, $default = FALSE) {
+  function __construct($id, $type, $default = FALSE) {
     $this->id = $id;
     $this->type = $type;
-    $this->address = $address;
     $this->default = $default;
   }
   
@@ -29,50 +30,43 @@ class customerEmailClass {
     return $this->type;
   }
 
-  function set_address($address) {
-    $this->address = $address;
-  }
-  function get_address() {
-    return $this->address;
-  }
-
-  function set_default($default) {
+  function set_default($id) {
     $this->default = $default;
   }
   function get_default() {
     return $this->default;
   }
 
+ }
 
+class customerEmailClass extends customerInfoBaseClass {
+
+  private $address = NULL;
+
+
+  function __construct($id, $type, $address, $default = FALSE) {
+    parent::__construct($id, $type, $default);
+    
+    $this->address = $address;
+  }
+  
+  function set_address($address) {
+    $this->address = $address;
+  }
+  function get_address() {
+    return $this->address;
+  }
 }
 
-class customerPhoneClass {
-  protected $id = NULL;
-  protected $type = NULL; // "Work", "Home"
-  protected $number = NULL;
-  protected $extension = NULL; // Corrected mispelling?
-  protected $default = FALSE; 
+class customerPhoneClass extends customerInfoBaseClass {
+  private $number = NULL;
+  private $extension = NULL; // Corrected mispelling?
   
   function __construct($id, $type, $number, $extension, $default = FALSE) {
-    $this->id = $id;
-    $this->type = $type;
+    parent::__construct($id, $type, $default);
+    
     $this->number = $number;
     $this->extension = $extension;
-    $this->default = $default;
-  }
-
-  function set_id($id) {
-    $this->id = $id;
-  }
-  function get_id() {
-    return $this->id;
-  }
-
-  function set_type($type) {
-    $this->type = $type;
-  }
-  function get_type() {
-    return $this->type;
   }
 
   function set_number($number) {
@@ -88,44 +82,26 @@ class customerPhoneClass {
   function get_extension() {
     return $this->extension;
   }
-
-  function set_default($default) {
-    $this->default = $default;
-  }
-  function get_default() {
-    return $this->default;
-  }
-
-
+  
 }
 
-class customerAddressClass {
-  protected $id = NULL;
-  protected $label = NULL; // "Home", "Parents"
-  protected $type = NULL; // "shipping", "billing"
-  protected $street = array(); // array with two elements
-  protected $city = NULL;
-  protected $state = NULL;
-  protected $zip = NULL;
-  protected $default = FALSE;
+class customerAddressClass extends customerInfoBaseClass {
+  private $label = NULL; // "Home", "Parents"
+  private $street = array(); // array with two elements
+  private $city = NULL;
+  private $state = NULL;
+  private $zip = NULL;
   
   function __construct($id, $label, $type, $street, $city, $state, $zip, $default = FALSE) {
-    $this->id = $id;
+    parent::__construct($id, $type, $default);
+    
     $this->label = $label;
-    $this->type = $type;
     $this->street = $street;
     $this->city = $city;
     $this->state = $state;
     $this->zip = $zip;
-    $this->default = $default;
   }
   
-  function set_id($id) {
-    $this->id = $id;
-  }
-  function get_id() {
-    return $this->id;
-  }
 
   function set_label($label) {
     $this->label = $label;
@@ -133,14 +109,7 @@ class customerAddressClass {
   function get_label() {
     return $this->label;
   }
-
-  function set_type($type) {
-    $this->type = $type;
-  }
-  function get_type() {
-    return $this->type;
-  }
-  
+ 
   // street
 
   function set_city($city) {
@@ -162,23 +131,15 @@ class customerAddressClass {
   }
   function get_zip() {
     return $this->zip;
-  }
-  
-  function set_default($default) {
-    $this->default = $default;
-  }
-  function get_default() {
-    return $this->default;
-  }
-  
+  }   
 }
 
 class customerClass {
-  protected $firstName = NULL;
-  protected $lastName = NULL;
-  protected $email = array();
-  protected $phone = array();
-  protected $address = array();
+  private $firstName = NULL;
+  private $lastName = NULL;
+  private $email = array();
+  private $phone = array();
+  private $address = array();
   
   function __construct($first_name, $last_name, $email = NULL, $phone = NULL, $address = NULL) {
     $this->first_name = $first_name;
@@ -202,10 +163,25 @@ class customerClass {
     return $this->lastName;
   }
   
-  // email
+  function set_email($email) {
+    $this->email = $email;
+  }
+  function get_email() {
+    return $this->email;
+  }
   
-  // phone
+  function set_phone($phone) {
+    $this->phone = $phone;
+  }
+  function get_phone() {
+    return $this->address;
+  }
   
-  // address
   
+  function set_address($address) {
+    $this->address = $address;
+  }
+  function get_address() {
+    return $this->address;
+  }
 }
