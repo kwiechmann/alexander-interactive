@@ -5,14 +5,31 @@
 class customerInfoBaseClass {
   private $id = NULL;
   private $type =  NULL; 
-    // customerEmailClass: ``"personal", "work", "cell"  
-    // customerPhoneClass: ``"Work", "Home"
-    // vudyomrtAddressClass: "shipping", "billing"
+    // customerEmailClass: ``'personal', 'work' 
+    // customerPhoneClass: ``'work', 'cell'
+    // customerAddressClass: 'shipping', 'billing'
   private $default = FALSE;
 
   function __construct($id, $type, $default = FALSE) {
     $this->id = $id;
-    $this->type = $type;
+    
+    switch (get_class($this)) {
+      case 'customerEmailClass':   
+        $types = array('personal', 'work');
+        break;
+      case 'customerPhoneClass':
+        $types = array('work', 'cell');
+        break;
+      case 'customerAddressClass': 
+        $types = array('shipping', 'billing');
+        break;
+      default:            
+        $types = array();
+    }
+    if (in_array($type, $types)) {
+      $this->type = $type;
+    };
+    
     $this->default = $default;
   }
   
@@ -174,7 +191,7 @@ class customerClass {
     $this->phone = $phone;
   }
   function get_phone() {
-    return $this->address;
+    return $this->phone;
   }
   
   
