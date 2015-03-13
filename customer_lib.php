@@ -4,13 +4,10 @@
 
 class customerInfoBaseClass {
   private $id = NULL;
-  private $type =  NULL; 
-    // customerEmailClass: ``'personal', 'work' 
-    // customerPhoneClass: ``'work', 'cell'
-    // customerAddressClass: 'shipping', 'billing'
+  private $type =  NULL;
   private $default = FALSE;
 
-  function __construct($id, $type, $default = FALSE) {
+  function __construct($id, $type, $default= FALSE) {
     $this->id = $id;
     
     switch (get_class($this)) {
@@ -28,11 +25,11 @@ class customerInfoBaseClass {
     }
     if (in_array($type, $types)) {
       $this->type = $type;
-    };
-    
+    }
+
     $this->default = $default;
   }
-  
+
   function set_id($id) {
     $this->id = $id;
   }
@@ -47,13 +44,12 @@ class customerInfoBaseClass {
     return $this->type;
   }
 
-  function set_default($id) {
+  function set_default($default) {
     $this->default = $default;
   }
   function get_default() {
     return $this->default;
   }
-
  }
 
 class customerEmailClass extends customerInfoBaseClass {
@@ -193,8 +189,7 @@ class customerClass {
   function get_phone() {
     return $this->phone;
   }
-  
-  
+   
   function set_address($address) {
     $this->address = $address;
   }
