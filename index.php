@@ -105,19 +105,19 @@ $customer_object = new customerClass($first_name, $last_name, $mail_objects, $ph
 
 <strong class="header">Complete customer_object:</strong>
 
-      <?php print_r($customer_object); ?>
+<?php print_r($customer_object); ?>
 
 <strong class="header">Complete customer_object->get_email():</strong>
 
-      <?php print_r($customer_object->get_email()); ?>
+<?php print_r($customer_object->get_email()); ?>
 
 <strong class="header">Complete customer_object->get_phone():</strong>
 
-      <?php print_r($customer_object->get_phone()); ?>
+<?php print_r($customer_object->get_phone()); ?>
 
 <strong class="header">Complete customer_object->get_address():</strong>
 
-      <?php print_r($customer_object->get_address()); ?>
+<?php print_r($customer_object->get_address()); ?>
 
     </pre>
   </body>
